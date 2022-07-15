@@ -1,0 +1,23 @@
+Count of Men in Engineering : db.employeeSalary.find({department:"Engineering"}).count()
+
+Count of Women in Engineering who earn less than one million : db.employeeSalary.find({$and:[{department:"Engineering"},{gender:"Female"},{salary:{$lt:1000000}}]}).count()
+
+Count of people make less than 80k : db.employeeSalary.find({salary:{$lt:80000}}).count()
+
+People who belong Accounting and Legal who make less than 100k : db.employeeSalary.find({$and:[{$or:[{department:"Accounting"},{department:"Legal"}]},{salary:{$lt:100000}}]})
+
+Top 10 earning Men : db.employeeSalary.find().sort(salary:-1).limit(10)
+
+Bottom 10 earning Women : db.employeeSalary.find({gender:"Female"}).sort(salary:1).limit(10)
+
+Top 5 earning Engineering people : db.employeeSalary.find({department:"Engineering"}).sort(salary:-1).limit(5)
+
+Bottom 5 earning Legal people : db.employeeSalary.find({department:"Legal"}).sort(salary:1).limit(5)
+
+Women ranked 30 to 50 in terms of salary earned : db.employeeSalary.find({gender:"Female"}).sort(salary:-1).skip(29).limit(21)
+
+Men ranked 50 to 100 in terms of salary earned : db.employeeSalary.find({gender:"Male"}).sort(salary:-1).skip(49).limit(51)
+
+Bottom 50 earning women in Engineering : db.employeeSalary.find({gender:"Female",department:"Engineering"}).sort(salary:1).limit(50)
+
+Top 50 earning men in Human Resources : db.employeeSalary.find({gender:"Male",department:"Human Resources"}).sort(salary:-1).limit(50)
